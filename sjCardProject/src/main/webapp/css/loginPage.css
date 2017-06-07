@@ -1,0 +1,26 @@
+@CHARSET "EUC-KR";
+
+.container {
+	margin-top: 20px;
+}
+
+.modal-header {
+	background-color: grey;
+	color: white;
+}
+
+.login-status {
+	color: red;
+}
+
+.vcard-link {
+	float: right;
+}
+
+.upload-status {
+	color: red;
+}
+
+.errorMessage {
+	color: red;
+}

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="user">
+
+	<insert id="insertUser">
+
+		/*
+			userTblDao.insertUser	
+		*/
+		
+
+		INSERT INTO SJCARD_USERS
+		VALUES
+		(
+		#{username},
+		#{password},
+		#{lastName},
+		#{givenName},
+		#{email},
+		#{tellNum},
+		#{company},
+		#{url},
+		#{image},
+		#{authority},
+		#{enabled}
+		)
+
+
+	</insert>
+
+	<update id="updateUser">
+
+		/*
+			userTblDao.updateUser	
+		*/
+		
+		UPDATE SJCARD_USERS
+		SET
+		
+		USER_PASS = #{password},
+		LASTNAME = #{lastName},
+		GIVENNAME = #{givenName},
+		EMAIL = #{email},
+		TEL_NUMBER = #{tellNum},
+		COMPANY = #{company},
+		URL = #{url},
+		IMAGE = #{image}
+
+		WHERE
+		USER_ID = #{username}
+
+	</update>
+
+	<select id="selectUser" resultType="map">
+
+		/*
+			userTblDao.selectUser	
+		*/
+		
+
+		SELECT USER_ID as username,
+		USER_PASS as password,
+		ENABLED as enabled,
+		AUTHORITY as authority
+
+		FROM SJCARD_USERS
+
+		WHERE USER_ID = #{username}
+
+	</select>
+
+	<select id="getUserInfo" resultType="kr.co.esjee.sjCardProject.admin.user.service.UserTblVO">
+
+		/*
+			userTblDao.getUserInfo	
+		*/
+		
+
+		SELECT *
+
+		FROM SJCARD_USERS
+
+		WHERE USER_ID = #{username}
+
+	</select>
+
+	<select id="listMembers" parameterType="map" resultType="map">
+		
+		/*
+			userTblDao.listMembers	
+		*/
+		
+		SELECT USER_ID, IMAGE, EMAIL
+
+				FROM (SELECT ROWNUM NUMROW, AA.*
+
+				FROM (SELECT USER_ID, IMAGE, EMAIL
+
+				FROM SJCARD_USERS 
+		
+		<choose>
+			<when test="input != null">
+				
+				WHERE lower(${option}) like '%'||#{input}||'%'
+				ORDER BY ${option}
+				<choose>
+					<when test="order == 'desc'">DESC</when>
+					<otherwise>ASC</otherwise>
+				</choose>
+				) AA )
+
+				WHERE NUMROW &gt; #{curPage}*10-10 AND NUMROW
+				&lt;= #{curPage}*10
+
+			</when>
+
+			<otherwise>
+
+				ORDER BY ${option}
+				<choose>
+					<when test="order == 'desc'">DESC</when>
+					<otherwise>ASC</otherwise>
+				</choose>
+				) AA )
+
+				WHERE NUMROW &gt; #{curPage}*10-10 AND NUMROW
+				&lt;= #{curPage}*10
+
+			</otherwise>
+		</choose>
+
+	</select>
+
+	<select id="countMembers" parameterType="map" resultType="int">
+	
+		/*
+			userTblDao.countMembers	
+		*/
+		
+
+		SELECT COUNT(*) FROM SJCARD_USERS
+
+		<if test="input != null">
+			WHERE lower(${option}) like '%'||#{input}||'%'
+		</if>
+
+	</select>
+	
+	<delete id="deleteUser">
+	
+		/*
+			userTblDao.deleteUser	
+		*/
+		
+		DELETE FROM SJCARD_USERS
+		WHERE USER_ID = #{username}
+	</delete>
+
+</mapper>
+
+

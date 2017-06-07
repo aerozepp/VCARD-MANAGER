@@ -1,0 +1,58 @@
+@CHARSET "EUC-KR";
+
+.container {
+	margin-top: 20px;
+}
+
+.headline {
+	margin-bottom: 10px;
+	font-size: large;
+	font-weight: bold;
+	color: blue;
+	font-size: large;
+}
+
+li {
+	margin-left: 20px;
+}
+
+.log {
+	color: red;
+}
+
+.modal-header {
+	background-color: grey;
+	color: white;
+}
+
+#username-status {
+	color: red;
+}
+
+#password-status {
+	color: red;
+}
+
+#confirm-status {
+	color: red;
+}
+
+.exportStatus{
+	color: red;
+}
+
+.panel-heading {
+	background: grey;
+}
+
+ul {
+	margin-top: 20px;
+	list-style-type: none;
+}
+
+/* #thumbnail{
+	background : red;
+	border : 1px solid black;
+	width : 100px;
+	height : 100px;
+} */

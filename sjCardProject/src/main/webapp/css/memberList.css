@@ -1,0 +1,29 @@
+@CHARSET "EUC-KR";
+
+img {
+	border-radius: 50%;
+	width: 30px;
+	height: 30px;
+}
+
+.memberList {
+	cursor: pointer;
+}
+
+ul{
+	list-style-type: none;
+}
+
+.modal-header{
+	background : grey;
+	color : white;
+}
+
+.search-status{
+	color : red;
+}
+
+#username{
+	font-weight: bold;
+	color : blue;
+}
